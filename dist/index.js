@@ -18,7 +18,11 @@ const admin_routes_1 = __importDefault(require("./interfaces/routes/admin.routes
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: "http://localhost:3000",
+    origin: [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "https://la-bitacora-viajera-ds65-git-main-ivana-speziales-projects.vercel.app",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));
@@ -37,6 +41,9 @@ app.use("/", locations_routes_1.default);
 app.use("/upload", upload_routes_1.default);
 app.use("/next-destinations", nextDestination_routes_1.default);
 app.use("/admin", admin_routes_1.default);
+app.get("/", (req, res) => {
+    res.send("La Bitácora Viajera API activa 🧭");
+});
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
