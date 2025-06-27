@@ -18,7 +18,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://la-bitacora-viajera-ds65-git-main-ivana-speziales-projects.vercel.app",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -41,6 +45,9 @@ app.use("/", locationRoutes);
 app.use("/upload", uploadRoutes);
 app.use("/next-destinations", nextDestinationRoutes);
 app.use("/admin", adminRoutes);
+app.get("/", (req, res) => {
+  res.send("La Bitácora Viajera API activa 🧭");
+});
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
